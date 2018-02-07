@@ -2,7 +2,9 @@ require ('pg')
 require_relative('../db/sql_runner')
 class Artist
 
-attr_reader :name, :id
+attr_accessor :name
+
+attr_reader :id
 
 
 
@@ -31,6 +33,18 @@ attr_reader :name, :id
     values = [@id]
     artist_albums = SqlRunner.run(sql, values)
     return artist_albums.map{|artist| Album.new(artist)}
+  end
+
+  def update()
+    sql = 'UPDATE artists SET name = $1 WHERE id = $2'
+    values = [@name, @id]
+    SqlRunner.run(sql, values)
+  end
+
+  def delete()
+    sql = 'DELETE FROM artists WHERE id = $1'
+    values = [@id]
+    SqlRunner.run(sql,values)
   end
 
 

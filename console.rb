@@ -47,6 +47,14 @@ album5 = Album.new({
   album4.save()
   album5.save()
 
+  album5.genre = 'metal'
+  album5.update()
+
+artist2.name = 'Pantera'
+artist2.update()
+
+artist2.delete()
+
 
 
   binding.pry
