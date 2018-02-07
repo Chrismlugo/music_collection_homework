@@ -25,4 +25,6 @@ attr_reader :id
     values = [@title,@genre,@artist_id]
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
+
+  
 end
