@@ -31,4 +31,6 @@ attr_reader :id
     return albums.map{|albums| Album.new(albums)}
 
   end
+
+
 end
