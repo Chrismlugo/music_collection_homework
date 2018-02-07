@@ -1,4 +1,5 @@
 require ('pg')
+require_relative('../db/sql_runner')
 class Album
 
 attr_accessor :title, :genre, :artist_id
@@ -22,8 +23,6 @@ attr_reader :id
     VALUES
     ($1,$2,$3) RETURNING *;"
     values = [@title,@genre,@artist_id]
-    db.prepare('save', sql)
-    @id = db.exec_prepared('save', values)[0]['id'].to_i
-    db.close()
+    @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 end

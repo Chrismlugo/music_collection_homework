@@ -1,4 +1,5 @@
 require ('pg')
+require_relative('../db/sql_runner')
 class Artist
 
 attr_reader :name, :id
@@ -15,9 +16,8 @@ attr_reader :name, :id
     sql = 'INSERT INTO artists (name) Values ($1) RETURNING *;
   '
   values = [@name]
-  db.prepare('save', sql)
-  @id = db.exec_prepared('save', values)[0]['id'].to_i
-  db.close()
+  @id = SqlRunner.run(sql, values)[0]['id'].to_i
+
   end
 
 
