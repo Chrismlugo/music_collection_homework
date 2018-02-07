@@ -46,5 +46,24 @@ attr_reader :id
 
   end
 
+  def delete()
+    sql = 'DELETE FROM albums where id = $1'
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def Album.delete_all()
+    sql = 'DELETE FROM albums;'
+    SqlRunner.run(sql)
+  end
+
+  def Album.find(id)
+    sql = "SELECT * FROM albums WHERE id = $1"
+    values = [id]
+    album = SqlRunner.run(sql, values)
+    return album[0]
+  end
+
+
 
 end

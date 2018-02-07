@@ -47,5 +47,17 @@ attr_reader :id
     SqlRunner.run(sql,values)
   end
 
+  def Artist.delete_all()
+    sql = 'DELETE FROM artists;'
+    SqlRunner.run(sql)
+  end
+
+  def Artist.find(id)
+    sql = "SELECT * FROM artists WHERE id = $1"
+    values = [id]
+    artist = SqlRunner.run(sql, values)
+    return artist[0]
+  end
+
 
 end
