@@ -15,7 +15,6 @@ attr_reader :id
 
 
   def save()
-    db = PG.connect({ dbname: 'music_collection', host: 'localhost'})
     sql = "INSERT INTO albums (
     title,
     genre,
@@ -26,5 +25,10 @@ attr_reader :id
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
-  
+  def self.all()
+    sql = "SELECT * FROM albums;"
+    albums = SqlRunner.run(sql)
+    return albums.map{|albums| Album.new(albums)}
+
+  end
 end
